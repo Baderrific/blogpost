@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // this is the axios setup. all requests use the server url from the .env file
 const api = axios.create({
-	baseURL: import.meta.env.VITE_BLOG_API
+	baseURL: import.meta.env.VITE_BLOG_API || 'https://blogpost-mdba.onrender.com'
 });
 
 // before every request, check if there is a token and add it to the headers
