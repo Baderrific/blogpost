@@ -13,9 +13,15 @@ mongoose.connect(process.env.MONGODB_STRING);
 
 mongoose.connection.once("open", () => console.log("Now connected to MongoDB Atlas"));
 
+// CLIENT_URL can hold more than one url, separated by commas
+// the trailing slash is removed because the browser origin never has one
+const allowedOrigins = (process.env.CLIENT_URL || "http://localhost:5173")
+	.split(",")
+	.map(url => url.trim().replace(/\/$/, ""));
+
 const corsOption = {
 
-	origin: [process.env.CLIENT_URL || "http://localhost:5173", "http://localhost:8080"],
+	origin: allowedOrigins,
 	credentials: true,
 	optionsSuccessStatus: 200
 }
